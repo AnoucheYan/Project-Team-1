@@ -11,7 +11,7 @@ async function register(req, res) {
     if (!email || !password || !firstName || !lastName || !country) {
       res.status(400).json({
         error: "email, firstName, lastName, country and password are required",
-      })
+      });
     }
 
     const existingUser = await Users.findOne({ email });
@@ -55,17 +55,17 @@ async function confirm(req, res) {
       process.env.VERIFICATION_TOKEN_SECRET
     );
 
-    const isVerified = await Users.findOne({ email: decodedToken.email });
+    const isVerified = await Users.findOne({ _id: decodedToken._id });
 
     if (!isVerified.toObject().isVerified) {
       if (isVerified.toObject().isUpdatedEmail) {
         await Users.updateOne(
-          { email: decodedToken.email },
+          { _id: decodedToken._id },
           { $set: { isVerified: true, isUpdatedEmail: false } }
         );
       } else {
         await Users.updateOne(
-          { email: decodedToken.email },
+          { _id: decodedToken._id },
           { $set: { isVerified: true, coins: 1000 } }
         );
       }
@@ -106,9 +106,10 @@ async function login(req, res) {
     }
 
     if (!user.toObject().isVerified) {
-      res.json({
-        message: "Please first verify your account by email!!!"
+      res.status(201).json({
+        message: "Please first verify your account by email!!!",
       });
+      return
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.hashedPassword);
@@ -120,7 +121,10 @@ async function login(req, res) {
       return;
     }
 
-    const token = await jwt.sign({ email }, process.env.ACCESS_TOKEN_SECRET);
+    const token = await jwt.sign(
+      { _id: user._id.valueOf() },
+      process.env.ACCESS_TOKEN_SECRET
+    );
 
     res.status(200).json({
       message: "login successful",

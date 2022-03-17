@@ -6,7 +6,7 @@ async function getMe(req, res, next) {
   try {
     const user = await Users.findOne(
       {
-        email: req.user.email,
+        _id: req.user._id,
       },
       "_id userName country coins email"
     );
@@ -51,14 +51,14 @@ async function updateMe(req, res, next) {
 async function updatePassword(req, res, next) {
   const { password, newPassword } = req.body;
   try {
-    const user = await Users.findOne({ email: req.user.email });
+    const user = await Users.findOne({ _id: req.user._id });
     const isPasswordMatch = await bcrypt.compare(password, user.hashedPassword);
     if (!isPasswordMatch) {
       throw new Error("Password is incorrect");
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     await Users.updateOne(
-      { email: req.user.email },
+      { _id: req.user._id },
       { $set: { hashedPassword } }
     );
     res.status(200).json({ message: "Password updated successfully" });
@@ -70,7 +70,7 @@ async function updatePassword(req, res, next) {
 
 async function deleteMe(req, res, next) {
   try {
-    await Users.deleteOne({ email: req.user.email });
+    await Users.deleteOne({ _id: req.user._id });
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     console.log(error);

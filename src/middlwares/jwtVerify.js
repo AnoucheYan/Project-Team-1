@@ -12,7 +12,7 @@ async function verifyJwt(req, res, next) {
 
     const decoded = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-    const user = await Users.findOne({ email: decoded.email });
+    const user = await Users.findOne({ _id: decoded._id });
 
     if (!user) {
       throw new Error("User not found");
