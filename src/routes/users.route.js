@@ -1,6 +1,10 @@
 const { Router } = require("express");
 const verifyJwt = require("../middlwares/jwtVerify");
 const usersController = require("../controllers/users.controller");
+const {
+  userUpdateValidation,
+  updatePasswordValidation,
+} = require("../middlwares/userValidation");
 
 const router = Router();
 
@@ -93,9 +97,18 @@ router.get("/me", verifyJwt, usersController.getMe);
  *            properties:
  *              error:
  *                type: string
+ *     422:
+ *       description: Validation error
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               error:
+ *                 type: string
  */
 
-router.patch("/me", verifyJwt, usersController.updateMe);
+router.patch("/me",  userUpdateValidation, verifyJwt, usersController.updateMe);
 
 /**
  * @swagger
@@ -133,9 +146,18 @@ router.patch("/me", verifyJwt, usersController.updateMe);
  *            properties:
  *              error:
  *                type: string
+ *     422:
+ *       description: Validation error
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               error:
+ *                 type: string
  */
 
-router.patch("/me/password", verifyJwt, usersController.updatePassword);
+router.patch("/me/password", updatePasswordValidation, verifyJwt, usersController.updatePassword);
 
 /**
  * @swagger

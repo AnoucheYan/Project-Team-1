@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const authController = require("../controllers/auth.controller");
+const {userRegValidation} = require("../middlwares/userValidation");
 
 const router = Router();
 
@@ -70,9 +71,18 @@ const router = Router();
  *             properties:
  *               error:
  *                 type: string
+ *     422:
+ *       description: Validation error
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               error:
+ *                 type: string
  */
 
-router.post("/register", authController.register);
+router.post("/register", userRegValidation, authController.register);
 
 /**
  * @swagger
