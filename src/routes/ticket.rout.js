@@ -8,13 +8,13 @@ const ticketController = require('../controllers/ticket.controller');
  **/
 
 // create ticket
-ticketRouter.ticket('/', auth, ticketController.create);
+ticketRouter.post('/', auth, ticketController.create);
 
 // get one ticket
-ticketRouter.ticket('/:id', auth, ticketController.getSingle);
+ticketRouter.get('/:id', auth, ticketController.getSingle);
 
 // get batch tickets
-ticketRouter.ticket('/', auth, ticketController.getBatch);
+ticketRouter.get('/', auth, ticketController.getBatch);
 
 // update ticket
 ticketRouter.patch('/:id', auth, ticketController.update);

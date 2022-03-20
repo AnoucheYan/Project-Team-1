@@ -1,6 +1,6 @@
-const errorConfig = require('../config/error.config'),
-const ObjectId = require('mongoose').Types.ObjectId,
-const ticketSchema = require('../schemas/ticket.schema');
+const errorConfig = require('../config/error.config');
+const ObjectId = require('mongoose').Types.ObjectId;
+const ticketSchema = require('../models/ticket');
 
 class TicketController {
 

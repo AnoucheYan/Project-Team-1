@@ -1,6 +1,6 @@
-const mongoose = require('mongoose'),
-const mongoosePaginate = require('mongoose-paginate'),
-const Schema = mongoose.Schema,
+const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
+const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const TicketSchema = new Schema(
