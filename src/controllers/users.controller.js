@@ -260,7 +260,7 @@ async function buyAllShoppingCard(req, res, next) {
 
       coins -= currentTicket.price;
 
-      await Users.updateOne({ _id: req.user._id }, { $set: { coins } });
+      await Users.updateOne({ _id: req.user._id }, { $set: { coins }, shoppingCard:[] });
 
       await Users.updateOne(
         { _id: currentTicket.owner },
