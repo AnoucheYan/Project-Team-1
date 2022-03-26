@@ -7,7 +7,6 @@ const ticketCreteValidation = (req, res, next) => {
       .min(2)
       .required(),
     description: Joi.string()
-      .regex(/^[a-zA-Z]+$/)
       .min(2)
       .required(),
     countries: Joi.array().items(Joi.string())
