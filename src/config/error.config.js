@@ -7,6 +7,8 @@ module.exports = {
     nothingToRemove: {
         name: "nothingToRemove",
         message: "There is nothing to remove",
-        status: 404
+        status: 400
     },
+   
+    
 };
