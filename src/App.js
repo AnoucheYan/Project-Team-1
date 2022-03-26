@@ -7,6 +7,8 @@ const swaggerUi = require("swagger-ui-express");
 
 const authRouter = require("./routes/auth.route");
 const userRouter = require("./routes/users.route");
+const ticketRouter = require("./routes/ticket.rout");
+const orderRouter = require("./routes/orders.rout");
 
 const swaggerSpecs = swaggerJsdoc({
   definition: {
@@ -29,6 +31,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
+app.use("/tickets", ticketRouter);
+app.use("/orders", orderRouter);
 
 async function main() {
   try {

@@ -93,6 +93,9 @@ router.post("/register", userRegValidation, authController.register);
  *   parameters:
  *     - in: path
  *       name: token
+ *       schema:
+ *         type: string
+ *       required: true
  *   responses:
  *     200:
  *       description: Account verification by email
