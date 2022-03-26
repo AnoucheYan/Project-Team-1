@@ -23,12 +23,6 @@ ticketRouter.patch('/:id', auth, updateTicket);
 // delete single ticket
 ticketRouter.delete('/:id', auth, deleteTicket);
 
-/**
- * @swagger
- * components:
- *   tags:
- *    - name: Tickets
- */
 
 /**
  * @swagger
