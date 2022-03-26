@@ -1,14 +1,12 @@
 const { boolean } = require('joi');
 const mongoose = require('mongoose');
-// const mongoosePaginate = require('mongoose-paginate');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const TicketSchema = new Schema(
   {
     owner: {
-      type: ObjectId,
-            
+      type: ObjectId            
     },
     name: {
       type: String,
@@ -27,8 +25,7 @@ const TicketSchema = new Schema(
       required: true
     },
     date: {
-      type: Date,
-      
+      type: Date,      
       required: true,
     },
     canCancel: {
@@ -36,30 +33,30 @@ const TicketSchema = new Schema(
       required: true,
     },
     cancelDate: {
-      type: Date,
-      
+      type: Date,      
       required: true,
     },
     countries: {
       type: Array,
       required: true,
     },
-    likes: {
+    like: {
       type: Array
     },
     comment: {
       type: Array
     },
+    likeCount: {
+      type: Number,
+      default: "0",
+    }
 
   },
   {
-    timestamps: {
-      createdAt: 'created_at',
-      updatedAt: 'updated_at'
-    }
+    collection: "tickets", timestamps: true
   }
 );
 
-// TicketSchema.plugin(mongoosePaginate);
+
 
 module.exports = mongoose.model('Ticket', TicketSchema);
