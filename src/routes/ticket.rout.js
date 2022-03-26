@@ -1,13 +1,13 @@
 const express = require('express');
 const auth = require('../middlwares/jwtVerify');
 const commentController=require('../controllers/comment.controller');
-const ticketRouter = express.Router();
 const {create,deleteTicket, updateTicket, getTicket, getBatch, likeTicket} = require('../controllers/ticket.controller');
 const {
   ticketCreteValidation,
   ticketUpdateValidation,
 } = require('../middlwares/ticketValidation')
   
+const ticketRouter = express.Router();
 
 /**
  * @swagger
@@ -40,8 +40,6 @@ const {
  *              type: number
  *            quantity:
  *              type: number
- *            likeCount:
- *              type: number
  *            countries:
  *              type: array
  *              items:
@@ -68,7 +66,7 @@ const {
  *              message:
  *                type: string
  *     400:
- *       description: name, description, price, quantity,countries,date,canCancel and cancelDate are required
+ *       description: name, description, price, quantity, countries, date, canCancel and cancelDate are required
  *       content:
  *         application/json:
  *           schema:
@@ -300,8 +298,6 @@ ticketRouter.get('/:id', auth, getTicket);
  *              type: number
  *            quantity:
  *              type: number
- *            likeCount:
- *              type: number
  *            countries:
  *              type: array
  *              items:
@@ -316,14 +312,6 @@ ticketRouter.get('/:id', auth, getTicket);
  *              type: string
  *              example: "2022-03-26"
  *              format: date
- *            like:
- *              type: array
- *              items:
- *                type: string
- *            comment:
- *              type: array
- *              items:
- *                type: string
  * 
  * 
  *   responses:
@@ -337,7 +325,7 @@ ticketRouter.get('/:id', auth, getTicket);
  *              message:
  *                type: string
  *     400:
- *       description: name, description, price, quantity, likeCount, countries,date,canCancel and cancelDate are required
+ *       description: name, description, price, quantity, countries, date, cancelDate are required
  *       content:
  *         application/json:
  *           schema:

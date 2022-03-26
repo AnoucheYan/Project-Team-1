@@ -210,8 +210,6 @@ router.patch(
  *               type: string
  *              name:
  *               type: string
- *              price:
- *               type: number
  *     401:
  *       description: User not found or is not logged in
  *       content:
@@ -346,8 +344,6 @@ router.patch(
  *               type: string
  *              name:
  *               type: string
- *              price:
- *               type: number
  *     401:
  *       description: User not found or is not logged in
  *       content:
